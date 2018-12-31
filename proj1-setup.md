@@ -5,7 +5,7 @@
 ![image](https://user-images.githubusercontent.com/29029753/50553231-9daf1380-0cc8-11e9-9281-1ff2f3685d04.png)
 
 
-#### 1. Install and Start Web Server.
+### 1. Install and Start Web Server.
 
 ```
 $ sudo yum install httpd -y
@@ -24,4 +24,42 @@ $ sudo wget https://raw.githubusercontent.com/citb34/project-1-documentation/mas
 $ sudo systemctl restart httpd
 ```
 
+
+### 2. Install and Start Tomcat Server.
+
+While setting up any application it is always a good practice to create a user and run the application using that user.
+For that we are going to use `student` user to run out student application.
+
+#### Add user and install java
+```
+$ sudo useradd student
+$ sudo yum install java -y
+```
+
+#### Download and setup App Server and run it as student user
+```
+$ sudo su - student 
+
+student $ wget http://mirrors.wuchna.com/apachemirror/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz
+student $ tar -xf apache-tomcat-8.5.37.tar.gz
+student $ cd apache-tomcat-8.5.37
+student $ wget https://github.com/citb34/project-1-documentation/raw/master/studentapp.war -O webapps/student.war
+student $ vim conf/context.xml
+<Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
+               maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+               username="USERNAME" password="PASSWORD" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://RDS-ENDPOINT:3306/DATABASE"/>
+
+##### Add the above content just before the last line, Last line usually looks like </Context>
+##### Note: Replace USERNAME, PASSWORD, RDS-ENDPOINT, DATABASE with associated RDS values after creating it.
+```
+
+Switch back to CentOS user and run the following commands.
+```
+$ sudo wget https://raw.githubusercontent.com/citb34/project-1-documentation/master/tomcat-init -O /etc/init.d/tomcat
+$ sudo chmod ugo+x /etc/init.d/tomcat
+$ sudo systemctl daemon-reload
+$ sudo systemctl start tomcat
+$ sudo systemctl enable tomcat
+```
 
