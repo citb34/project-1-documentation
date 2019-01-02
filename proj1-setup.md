@@ -40,8 +40,7 @@ $ sudo yum install java -y
 ```
 $ sudo su - student 
 
-student $ wget http://mirrors.wuchna.com/apachemirror/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz
-student $ tar -xf apache-tomcat-8.5.37.tar.gz
+student $ wget -qO- http://mirrors.wuchna.com/apachemirror/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz | tar -xz
 student $ cd apache-tomcat-8.5.37
 student $ wget https://github.com/citb34/project-1-documentation/raw/master/studentapp.war -O webapps/student.war
 student $ vim conf/context.xml
