@@ -1,4 +1,4 @@
-### Documentation to setup your application.
+### Documentation to setup web your application.
 
 #### Assuming the following architecture , Doc has been made.
 
@@ -61,4 +61,13 @@ $ sudo systemctl daemon-reload
 $ sudo systemctl start tomcat
 $ sudo systemctl enable tomcat
 ```
+
+
+
+# To setup application with WEB and API.
+
+![image](https://user-images.githubusercontent.com/29029753/50938864-2fc0d400-14a0-11e9-9ffa-6b2f9ea7e2b4.png)
+
+
+
 
